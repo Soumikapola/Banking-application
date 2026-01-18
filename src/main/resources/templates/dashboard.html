@@ -12,7 +12,7 @@
         <div class="header">
             <h1>Welcome, <a href="/profile" th:text="${user.username}"
                     style="text-decoration: none; color: #d35400;">User</a>!</h1>
-            <form action="/logout" method="post" style="display:inline;">
+            <form th:action="@{/logout}" method="post" style="display:inline;">
                 <button type="submit" class="btn btn-red" style="padding: 5px 10px; font-size: 14px;">Logout</button>
             </form>
         </div>
