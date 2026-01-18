@@ -23,8 +23,13 @@ public class SecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers("/register", "/css/**").permitAll()
+                                                .requestMatchers("/register", "/css/**", "/h2-console/**").permitAll() // Allow
+                                                                                                                       // H2
+                                                                                                                       // Console
                                                 .anyRequest().authenticated())
+                                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")) // Disable CSRF for H2
+                                .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Allow frames for
+                                                                                                    // H2
                                 .formLogin(form -> form
                                                 .loginPage("/login")
                                                 .defaultSuccessUrl("/dashboard", true)
