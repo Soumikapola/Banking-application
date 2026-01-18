@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width: 500px;">
+        <h2>Edit Profile</h2>
+
+        <div th:if="${param.success}" class="success">
+            Profile updated successfully!
+        </div>
+
+        <form th:action="@{/profile/update}" method="post">
+            <input type="hidden" name="id" th:value="${user.id}">
+            <input type="hidden" name="username" th:value="${user.username}">
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="fullName" th:value="${user.fullName}" required>
+            </div>
+
+            <div class="form-group">
+                <label>New Password (leave blank to keep current)</label>
+                <input type="password" name="password" minlength="8" placeholder="New Password">
+            </div>
+
+            <button type="submit" class="btn btn-nude" style="width: 100%;">Update Profile</button>
+        </form>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #D7CCC8;">
+
+        <form th:action="@{/profile/delete}" method="post"
+            onsubmit="return confirm('Are you sure? This cannot be undone!');">
+            <label style="color: #A94442;">Danger Zone</label>
+            <button type="submit" class="btn btn-red" style="width: 100%;">Delete Account</button>
+        </form>
+
+        <a href="/dashboard" class="back-link">Back to Dashboard</a>
+    </div>
+
+</body>
+
+</html>

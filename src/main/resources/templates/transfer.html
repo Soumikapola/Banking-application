@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transfer Money</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; display: flex; justify-content: center; height: 100vh; align-items: center; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; color: #666; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; } /* box-sizing ensures padding doesn't widen the input */
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background: #218838; }
+        .error { color: #dc3545; text-align: center; margin-bottom: 15px; }
+        .back-link { display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Transfer Money</h2>
+
+    <!-- Show current balance for reference -->
+    <p style="text-align: center; margin-bottom: 20px;">
+        Current Balance: <strong th:text="${'$' + account.balance}">$0.00</strong>
+    </p>
+
+    <!-- Error Message (e.g., Insufficient Funds) -->
+    <div th:if="${error}" class="error">
+        <p th:text="${error}">Error message</p>
+    </div>
+
+    <!-- The Form -->
+    <form action="/transfer" method="post">
+
+        <div class="form-group">
+            <label for="toAccountNumber">To Account Number</label>
+            <input type="text" id="toAccountNumber" name="toAccountNumber" required placeholder="Enter recipient's account number">
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" name="amount" required min="1" step="0.01" placeholder="0.00">
+        </div>
+
+        <button type="submit">Send Money</button>
+    </form>
+
+    <a href="/dashboard" class="back-link">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

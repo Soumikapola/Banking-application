@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login - Banking App</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body class="auth-page" style="align-items: center; justify-content: center;">
+
+    <div class="container" style="max-width: 400px;">
+        <h2>Login</h2>
+
+        <div th:if="${param.error}" class="error">
+            Invalid username or password.
+        </div>
+
+        <div th:if="${param.success}" class="success">
+            Registration successful! Please login.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" required minlength="4" autofocus />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required minlength="8" />
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary">Login</button>
+        </form>
+
+        <div class="text-center" style="margin-top: 15px;">
+            <a href="/register">Create an Account</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

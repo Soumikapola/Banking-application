@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register - Banking App</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body class="auth-page" style="align-items: center; justify-content: center;">
+
+    <div class="container" style="max-width: 400px;">
+        <h2>Sign Up</h2>
+
+        <div
+            style="background-color: #fcf8e3; color: #8a6d3b; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 14px;">
+            <strong>Requirements:</strong><br>
+            • Username: Min 4 characters<br>
+            • Password: Min 8 chars. Must include numbers & special characters.
+        </div>
+
+        <div th:if="${error}" class="error" th:text="${error}">
+            Error message
+        </div>
+
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" th:field="*{fullName}" required />
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" th:field="*{username}" required minlength="4" placeholder="Min 4 chars" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" th:field="*{password}" required minlength="8" placeholder="Min 8 chars" />
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary">Register</button>
+        </form>
+
+        <div class="text-center" style="margin-top: 15px;">
+            <a href="/login" class="back-link">Already have an account? Login</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
